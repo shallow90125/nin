@@ -1,39 +1,31 @@
-#長谷川式➄
-def subtract_from_100(number):
-    first_ans = number if '九十三' in number else None
-    if first_ans:
-        input_string2 = input("それからまた7を引くと？: ")
-        second_ans = input_string2 if '八十六' in input_string2 else None
-        if second_ans:
-            return 2
-        else:
-            return 1
-    else:
-        return 0
+import random
 
-input_string = input("100-7 は？: ")
-point = subtract_from_100(input_string)
-print(point)
+# 数字から漢数字への変換辞書
+kanji_digits = {1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六', 7: '七', 8: '八', 9: '九'}
 
+def convert_to_kanji(number):
+    return ''.join(kanji_digits[int(digit)] for digit in str(number))
 
+def generate_random_kanji(digits):
+    number = random.randint(10**(digits-1), 10**digits - 1)
+    return convert_to_kanji(number)
 
-#長谷川式➅
 def extract_kanji(input_str):
     # 入力文字列から漢数字のみを抜き出して文字列として返す
     return ''.join(char for char in input_str if char.isdigit() or char in ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'])
 
 def reverse_counting():
-    # 3桁逆唱
-    number_3digit = "六八二"
-    number_ans = input("6-8-2を逆から言ってください: ")
-    
-   
+    # ランダムな3桁の数字を生成
+    number_3digit = generate_random_kanji(3)
+    print(f"数字: {number_3digit}")
+    number_ans = input(f"{number_3digit}を逆から言ってください: ")
 
     number_ans = extract_kanji(number_ans)
     if number_3digit == number_ans[::-1]:
-        # 4桁逆唱
-        number_4digit = "三五二九"
-        number_ans2 = input("3-5-2-9を逆から言ってください: ")
+        # ランダムな4桁の数字を生成
+        number_4digit = generate_random_kanji(4)
+        print(f"数字: {number_4digit}")
+        number_ans2 = input(f"{number_4digit}を逆から言ってください: ")
 
         number_ans2 = extract_kanji(number_ans2)
         if number_4digit == number_ans2[::-1]:
@@ -44,25 +36,28 @@ def reverse_counting():
         return 0  # 3桁逆唱失敗
 
 # テスト
-point = reverse_counting()
-print(point)
+point_5 = reverse_counting()
+print(point_5)
 
 
-# #長谷川式➅
-# def reverse_counting():
-#     # 3桁逆唱
-#     number_3digit = [6,8,2]
-#     number_ans = input("6-8-2桁の数字を逆から言ってください: ")
-#     if number_3digit == number_ans[::-1]:
-#         # 4桁逆唱
-#         number_4digit = [3,5,2,9]
-#         number_ans2 = input("3-5-2-9桁の数字を逆から言ってください: ")
-#         if number_4digit == number_ans2[::-1]:
-#             return 2  # 4桁逆唱成功
-#         else:
-#             return 1  # 4桁逆唱失敗
-#     else:
-#         return 0  # 3桁逆唱失敗
+import random
 
-# # テスト
-# reverse_counting()
+def subtract_from_100(number, subtrahend):
+    expected_first_answer = str(100 - subtrahend)
+    first_ans = number if expected_first_answer in number else None
+    if first_ans:
+        second_subtrahend = random.randint(1, 9)
+        expected_second_answer = str(100 - subtrahend - second_subtrahend)
+        input_string2 = input(f"それからまた{second_subtrahend}を引くと？: ")
+        second_ans = input_string2 if expected_second_answer in input_string2 else None
+        if second_ans:
+            return 2
+        else:
+            return 1
+    else:
+        return 0
+
+subtrahend = random.randint(1, 9)
+input_string = input(f"100-{subtrahend} は？: ")
+point_6 = subtract_from_100(input_string, subtrahend)
+print(point_6)
