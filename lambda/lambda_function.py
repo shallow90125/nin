@@ -49,7 +49,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
         )
         
 class TalkIntentHandler(AbstractRequestHandler):
-  def can_handle(self, handler_input):
+    def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
         return ask_utils.is_intent_name("TalkIntent")(handler_input)
 
