@@ -27,12 +27,24 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, you can say Hello or Help. Which would you like to try?"
+        speak_output = "オウム返しです。なんでもオウム返しします。なにか言ってみてください。"
+
+        directive = ElicitSlotDirective(
+            slot_to_elicit="user_utterance",
+            updated_intent = Intent(
+                name = "CaptureAllIntent",
+                confirmation_status = IntentConfirmationStatus.NONE,
+                slots ={
+                    "user_utterance": Slot(name= "user_utterance", value = "", confirmation_status = SlotConfirmationStatus.NONE)
+                }
+            )
+        )
 
         return (
             handler_input.response_builder
                 .speak(speak_output)
-                .ask(speak_output)
+                .ask("なにか言ってみてください。")
+                .add_directive(directive)
                 .response
         )
         
@@ -41,7 +53,7 @@ class TalkIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("TalkIntent")(handler_input)
         
     def handle(self, handler_input):
-        directive = ElicitSlotDirective()
+        directive = ElicitSlotDirective(slot_to_elicit="user_utterance" updated_intent=Intent(name=))
         return handler_input.response_builder.speak("ababa").ask("aaa").add_directive(directive).response
 
 
