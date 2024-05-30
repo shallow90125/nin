@@ -75,7 +75,7 @@ class TalkIntentHandler(AbstractRequestHandler):
                 .ask("なにか言ってみてください。")
                 .add_directive(directive)
                 .response
-        )
+        
 
 class HelloWorldIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
