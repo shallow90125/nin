@@ -12,7 +12,7 @@ from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 
-from ask_sdk_model import Response
+from ask_sdk_model import (Response, Intent, IntentConfirmationStatus, Slot, SlotConfirmationStatus)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -41,6 +41,7 @@ class TalkIntentHandler(AbstractRequestHandler):
         return ask_utils.is_intent_name("TalkIntent")(handler_input)
         
     def handle(self, handler_input):
+        directive = ElicitSlotDirective()
         return handler_input.response_builder.speak("ababa").ask("aaa").add_directive(directive).response
 
 
