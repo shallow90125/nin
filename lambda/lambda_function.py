@@ -48,10 +48,10 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .response
         )
 
-class TalkIntentHandler(AbstractRequestHandler):
+class CaptureAllIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("TalkIntent")(handler_input)
+        return ask_utils.is_intent_name("CaptureAllIntent")(handler_input)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
