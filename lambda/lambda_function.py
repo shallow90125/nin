@@ -35,6 +35,13 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .ask(speak_output)
                 .response
         )
+        
+class TalkIntentHandler(AbstractRequestHandler):
+    def can_handle(self, handler_input):
+        return ask_utils.is_intent_name("TalkIntent")(handler_input)
+        
+    def handle(self, handler_input):
+        return handler_input.response_builder.speak("ababa").ask("aaa").add_directive(directive).response
 
 
 class HelloWorldIntentHandler(AbstractRequestHandler):
