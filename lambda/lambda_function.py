@@ -47,7 +47,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
                 .add_directive(directive)
                 .response
         )
-        
+
 class TalkIntentHandler(AbstractRequestHandler):
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
