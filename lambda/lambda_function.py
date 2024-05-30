@@ -13,6 +13,7 @@ from ask_sdk_core.dispatch_components import AbstractExceptionHandler
 from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response, Intent, IntentConfirmationStatus, Slot, SlotConfirmationStatus
+from ask_sdk_model.dialog from ElicitSlotDirective
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
