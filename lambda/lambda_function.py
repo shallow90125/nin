@@ -49,13 +49,33 @@ class LaunchRequestHandler(AbstractRequestHandler):
         )
         
 class TalkIntentHandler(AbstractRequestHandler):
-    def can_handle(self, handler_input):
+  def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
         return ask_utils.is_intent_name("TalkIntent")(handler_input)
-        
-    def handle(self, handler_input):
-        directive = ElicitSlotDirective(slot_to_elicit="user_utterance" updated_intent=Intent(name=))
-        return handler_input.response_builder.speak("ababa").ask("aaa").add_directive(directive).response
 
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        user_input = handler_input.request_envelope.request.intent.slots["user_utterance"].value
+        speak_output = user_input
+
+        directive = ElicitSlotDirective(
+            slot_to_elicit="user_utterance",
+            updated_intent = Intent(
+                name = "CaptureAllIntent",
+                confirmation_status = IntentConfirmationStatus.NONE,
+                slots ={
+                    "user_utterance": Slot(name= "user_utterance", value = "", confirmation_status = SlotConfirmationStatus.NONE)
+                }
+            )
+        )
+
+        return (
+            handler_input.response_builder
+                .speak(speak_output)
+                .ask("なにか言ってみてください。")
+                .add_directive(directive)
+                .response
+        )
 
 class HelloWorldIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
